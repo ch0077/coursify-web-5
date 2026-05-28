@@ -11,7 +11,7 @@ const Mensagem = require('./models/mensagem');
 
 const app = express();
 app.use(cors({
-    origin: 'https://enchanting-frangipane-0080cd.netlify.app', // Link que o Netlify te deu
+    origin: 'https://sparkly-cucurucho-52d053.netlify.app', // Link que o Netlify te deu
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
