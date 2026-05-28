@@ -1,6 +1,6 @@
+import { Injectable } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
-import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +9,6 @@ import { CartService } from '../cart.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-
 export class CartComponent implements OnInit {
   itens: any[] = [];
   valorTotal: number = 0; // Variável para o total
@@ -18,12 +17,23 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.itens = this.cartService.pegarItens();
-    this.valorTotal = this.cartService.pegarTotal(); // Calcula ao abrir a tela
+    this.valorTotal = this.cartService.pegarTotal();
   }
 
   finalizarCompra() {
     alert('Compra Finalizada');
     this.itens = this.cartService.limparCarrinho();
-    this.valorTotal = 0; // Zera o total após a compra
+    this.valorTotal = 0;
   }
+}
+
+@Injectable({
+  providedIn: 'root' // Isso diz ao Angular: "Eu existo e posso ser usado em qualquer lugar"
+})
+export class CartService {
+  itens: any[] = [];
+
+  pegarItens() { return this.itens; }
+  pegarTotal() { return 0; /* sua lógica aqui */ }
+  limparCarrinho() { this.itens = []; return this.itens; }
 }

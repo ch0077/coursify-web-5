@@ -10,7 +10,11 @@ const Curso = require('./models/curso');
 const Mensagem = require('./models/mensagem');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'https://enchanting-frangipane-0080cd.netlify.app', // Link que o Netlify te deu
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));

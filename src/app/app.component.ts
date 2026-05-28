@@ -145,7 +145,7 @@ export class AppComponent implements OnInit {
       texto: this.novaAvaliacaoTexto,
       data: new Date().toLocaleDateString('pt-BR')
     };
-    this.http.post(`http://127.0.0.1:3000/cursos/${this.selectedCourse._id}/avaliar`, carga).subscribe({
+    this.http.post(`https://coursify-web-5.onrender.com/cursos/${this.selectedCourse._id}/avaliar`, carga).subscribe({
       next: (res: any) => {
         if (res.sucesso) {
           this.selectedCourse = res.curso; 
@@ -229,7 +229,7 @@ export class AppComponent implements OnInit {
 
   carregarListaDeAlunos() {
     if (this.userRole() !== 'adm') return; 
-    this.http.get('http://127.0.0.1:3000/usuarios/alunos').subscribe({
+    this.http.get('https://coursify-web-5.onrender.com/usuarios/alunos').subscribe({
       next: (res: any) => {
         if (res.sucesso) {
           this.listaDeAlunos = res.alunos.map((a: any) => ({
@@ -244,7 +244,7 @@ export class AppComponent implements OnInit {
     const email = this.userEmail();
     if (!email) return;
     const ids = this.carrinhoCursos.map(c => c._id);
-    this.http.post('http://127.0.0.1:3000/usuarios/comprar', { email, cursosIds: ids }).subscribe({
+    this.http.post('https://coursify-web-5.onrender.com/usuarios/comprar', { email, cursosIds: ids }).subscribe({
       next: (res: any) => {
         if (res.sucesso) {
           alert('🚀 Compra finalizada com sucesso! Bons estudos!');
@@ -258,7 +258,7 @@ export class AppComponent implements OnInit {
   }
 
   carregarPerfilDoBanco(email: string) {
-    this.http.get(`http://127.0.0.1:3000/usuarios/perfil/${email}`).subscribe({
+    this.http.get(`https://coursify-web-5.onrender.com/usuarios/perfil/${email}`).subscribe({
       next: (resposta: any) => {
         if (resposta.sucesso && resposta.usuario) {
           this.userName.set(resposta.usuario.nome);
@@ -287,7 +287,7 @@ export class AppComponent implements OnInit {
       telefone: this.formInputTelefone
     };
 
-    this.http.put('http://127.0.0.1:3000/usuarios/perfil', dadosParaSalvar)
+    this.http.put('https://coursify-web-5.onrender.com/usuarios/perfil', dadosParaSalvar)
       .subscribe({
         next: (resposta: any) => {
           if (resposta.sucesso) {
@@ -369,14 +369,14 @@ export class AppComponent implements OnInit {
   }
 
   carregarCursosDoBanco() {
-    this.http.get('http://127.0.0.1:3000/cursos').subscribe({
+    this.http.get('https://coursify-web-5.onrender.com/cursos').subscribe({
       next: (res: any) => { if (res.sucesso) this.courses = res.cursos; },
       error: (erro) => console.error('Erro ao carregar cursos:', erro)
     });
   }
 
   carregarEstatisticas() {
-    this.http.get('http://127.0.0.1:3000/estatisticas').subscribe({
+    this.http.get('https://coursify-web-5.onrender.com/estatisticas').subscribe({
       next: (res: any) => { if (res.sucesso) this.totalAlunos = res.totalAlunos; },
       error: (erro) => console.error('Erro ao carregar estatísticas:', erro)
     });
@@ -393,7 +393,7 @@ export class AppComponent implements OnInit {
     event.preventDefault();
     if (this.newCourse.title && this.newCourse.subtitle) {
       const cursoParaSalvar = { ...this.newCourse, criadorEmail: this.userEmail() };
-      this.http.post('http://127.0.0.1:3000/cursos', cursoParaSalvar).subscribe({
+      this.http.post('https://coursify-web-5.onrender.com/cursos', cursoParaSalvar).subscribe({
         next: (res: any) => {
           if (res.sucesso) {
             alert('✅ Curso criado no banco de dados!');
@@ -431,7 +431,7 @@ export class AppComponent implements OnInit {
   deleteCourse(course: any, event?: Event) {
     if (event) event.stopPropagation();
     if(confirm(`Tem certeza que deseja apagar o curso "${course.title}"?`)) {
-      this.http.delete(`http://127.0.0.1:3000/cursos/${course._id}`).subscribe({
+      this.http.delete(`https://coursify-web-5.onrender.com/cursos/${course._id}`).subscribe({
         next: (res: any) => {
           if (res.sucesso) {
             alert('🗑️ Curso apagado com sucesso!');
@@ -492,7 +492,7 @@ export class AppComponent implements OnInit {
       return;
     }
 
-    this.http.post('http://127.0.0.1:3000/login', {
+    this.http.post('https://coursify-web-5.onrender.com/login', {
       email: this.loginData.email, senha: this.loginData.password, idProfessor: this.loginData.idProf
     }).subscribe({
       next: (res: any) => {
@@ -541,7 +541,7 @@ export class AppComponent implements OnInit {
       tipo: tipoUsuario, idProfessor: ehProfessor ? this.cadastroData.idProf : undefined
     };
 
-    this.http.post('http://127.0.0.1:3000/cadastro', payload).subscribe({
+    this.http.post('https://coursify-web-5.onrender.com/cadastro', payload).subscribe({
       next: (res: any) => {
         if (res.sucesso) {
           alert('🎉 Conta criada com sucesso! Você já pode logar.');
@@ -663,7 +663,7 @@ export class AppComponent implements OnInit {
   onUpdateCourse(event: Event) {
     event.preventDefault();
     if (this.editingCourseIndex !== null && this.courseToEdit) {
-      this.http.put(`http://127.0.0.1:3000/cursos/${this.courseToEdit._id}`, this.courseToEdit).subscribe({
+      this.http.put(`https://coursify-web-5.onrender.com/cursos/${this.courseToEdit._id}`, this.courseToEdit).subscribe({
         next: (res: any) => {
           if (res.sucesso) {
             alert('✅ Curso actualizado com sucesso no banco de dados!');
@@ -761,7 +761,7 @@ export class AppComponent implements OnInit {
     };
 
     // 4. Manda para o servidor salvar
-    this.http.post('http://127.0.0.1:3000/usuarios/certificado', { email, certificado: novoCertificado }).subscribe({
+    this.http.post('https://coursify-web-5.onrender.com/usuarios/certificado', { email, certificado: novoCertificado }).subscribe({
       next: (res: any) => {
         if (res.sucesso) {
           alert(`Parabéns! O certificado do curso ${this.cursoAssistindo.title} foi gerado com sucesso!`);
@@ -816,7 +816,7 @@ export class AppComponent implements OnInit {
   apagarCertificado(cert: any) {
     if (confirm(`Tem certeza que deseja apagar o certificado de ${cert.titulo}?\n\nVocê precisará assistir a aula novamente se quiser gerá-lo de novo.`)) {
       const email = this.userEmail();
-      this.http.post('http://127.0.0.1:3000/usuarios/remover-certificado', { email, codigo: cert.codigo }).subscribe({
+      this.http.post('https://coursify-web-5.onrender.com/usuarios/remover-certificado', { email, codigo: cert.codigo }).subscribe({
         next: (res: any) => {
           if (res.sucesso) {
             this.meusCertificados = this.meusCertificados.filter(c => c.codigo !== cert.codigo);
