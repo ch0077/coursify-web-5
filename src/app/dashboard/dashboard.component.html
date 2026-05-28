@@ -1,0 +1,131 @@
+<div class="dashboard-container d-flex">
+  <aside class="sidebar d-flex flex-column p-4">
+    <div class="logo mb-5">
+      <h2 class="text-white fw-bold">Coursify<span>.</span></h2>
+    </div>
+
+   <nav class="nav flex-column gap-2 flex-grow-1">
+  <a href="javascript:void(0)" class="nav-link"><i class="fa-solid fa-house me-3"></i>Dashboard</a>
+  
+  <a routerLink="/meus-cursos" class="nav-link"><i class="fa-solid fa-book-open me-3"></i>Meus Cursos</a>
+  
+  <a routerLink="/dashboard" class="nav-link active"><i class="fa-solid fa-circle-plus me-3"></i>Criar Curso</a>
+  
+  <a href="javascript:void(0)" class="nav-link"><i class="fa-solid fa-users me-3"></i>Alunos</a>
+  <a href="javascript:void(0)" class="nav-link"><i class="fa-solid fa-chart-line me-3"></i>Vendas</a>
+  <a href="javascript:void(0)" class="nav-link"><i class="fa-solid fa-envelope me-3"></i>Mensagens</a>
+  <a href="javascript:void(0)" class="nav-link"><i class="fa-solid fa-gear me-3"></i>Configurações</a>
+</nav>
+
+    <div class="profile-section mt-auto d-flex align-items-center p-3 rounded">
+      <div class="avatar me-3">PF</div>
+      <div>
+        <p class="text-white mb-0 fw-bold">Prof. Fernando</p>
+        <p class="text-white-50 mb-0 small">Professor</p>
+      </div>
+      <i class="fa-solid fa-chevron-down ms-auto text-white-50"></i>
+    </div>
+  </aside>
+
+  <main class="main-content p-5 flex-grow-1 overflow-auto">
+    <div class="header-content mb-4">
+      <a href="#" class="back-dashboard"><i class="fa-solid fa-arrow-left me-2"></i> Voltar</a>
+      <h1 class="text-white fw-bold mt-3">Criar novo curso</h1>
+      <p class="text-white-50">Preencha as informações básicas do seu curso</p>
+    </div>
+
+    <section class="form-section glass-card p-5">
+      <h5 class="text-white fw-bold mb-4">Informações básicas</h5>
+      
+      <div class="row g-4 mb-5">
+        <div class="col-md-8">
+          <label class="form-label text-white-50">Título do curso*</label>
+          <input #tituloInput type="text" class="form-control" placeholder="ex: Figma do zero ao avançado">
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label text-white-50">Preço do curso*</label>
+          <div class="input-group">
+            <span class="input-group-text">R$</span>
+            <input #precoInput type="text" class="form-control" placeholder="00,00">
+          </div>
+        </div>
+        
+        <div class="col-12">
+          <label class="form-label text-white-50">Subtítulo do curso*</label>
+          <input #subtituloInput type="text" class="form-control" placeholder="Um breve resumo do que o aluno irá aprender">
+        </div>
+        
+        <div class="col-md-6">
+          <label class="form-label text-white-50">Nível do curso*</label>
+          <select #nivelInput class="form-select">
+            <option>Selecione o nível</option>
+            <option>Iniciante</option>
+            <option>Intermediário</option>
+            <option>Avançado</option>
+          </select>
+        </div>
+        
+        <div class="col-md-6">
+          <label class="form-label text-white-50">Categoria*</label>
+          <select #categoriaInput class="form-select">
+            <option>Selecione uma categoria</option>
+            <option>Design</option>
+            <option>Tecnologia</option>
+            <option>Negócios</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <div class="col-md-6">
+          <h5 class="text-white fw-bold mb-4">Imagem e descrição</h5>
+          
+          <input type="file" #fileInput id="uploadImagem" class="d-none" accept="image/*" (change)="onImagemSelecionada($event)">
+          
+          <label for="uploadImagem" class="upload-box d-flex flex-column align-items-center justify-content-center p-0 overflow-hidden w-100" style="height: 220px;">
+            @if (!imagemCursoUrl) {
+              <i class="fa-regular fa-image fs-1 mb-3"></i>
+              <p class="mb-0">Clique para enviar uma imagem</p>
+              <span class="small text-white-50">720x450 (16:9)</span>
+            } @else {
+              <img [src]="imagemCursoUrl" alt="Capa do Curso" class="imagem-preview w-100 h-100">
+            }
+          </label>
+        </div>
+        
+        <div class="col-md-6">
+          <label class="form-label text-white-50 mt-5">Descrição completa do curso*</label>
+          <div class="text-editor-mock d-flex flex-column">
+             <div class="editor-tools p-2 d-flex gap-3">
+               <i class="fa-solid fa-bold"></i> <i class="fa-solid fa-italic"></i> <i class="fa-solid fa-underline"></i>
+             </div>
+             <textarea #descInput class="form-control" rows="5" placeholder="Descreva todos os detalhes do curso..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end align-items-center gap-4 border-top border-secondary pt-4 mt-5">
+        <button (click)="cancelar([tituloInput, precoInput, subtituloInput, nivelInput, categoriaInput, descInput])" class="btn btn-outline-light rounded-pill px-4">
+          Cancelar
+        </button>
+        
+        <a href="#" (click)="salvarRascunho([tituloInput.value, precoInput.value, subtituloInput.value, nivelInput.value, categoriaInput.value, descInput.value]); $event.preventDefault()" class="text-white-50 text-decoration-none">
+          Salvar Rascunho
+        </a>
+        
+        <button (click)="publicarCurso({
+            titulo: tituloInput.value, 
+            preco: precoInput.value, 
+            subtitulo: subtituloInput.value, 
+            nivel: nivelInput.value, 
+            categoria: categoriaInput.value, 
+            desc: descInput.value
+          })" class="btn btn-primary rounded-pill px-5 py-2">
+          Publicar Curso
+        </button>
+      </div>
+      
+    </section>
+  </main>
+</div>

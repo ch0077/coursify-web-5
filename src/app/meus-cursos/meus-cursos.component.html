@@ -1,0 +1,81 @@
+<div class="dashboard-wrapper">
+  <div class="dashboard-container glass-panel">
+    
+    <aside class="sidebar">
+      <div class="logo-container">
+        <h1 class="logo">Coursify<span>.</span></h1>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="javascript:void(0)" class="nav-item"><i class="fa-solid fa-house"></i> Dashboard</a>
+        
+        <a routerLink="/meus-cursos" class="nav-item active"><i class="fa-solid fa-book-open"></i> Meus Cursos</a>
+        
+        <a routerLink="/dashboard" class="nav-item"><i class="fa-solid fa-circle-plus"></i> Criar Curso</a>
+        <a href="javascript:void(0)" class="nav-item"><i class="fa-solid fa-users"></i> Alunos</a>
+        <a href="javascript:void(0)" class="nav-item"><i class="fa-solid fa-chart-line"></i> Vendas</a>
+        <a href="javascript:void(0)" class="nav-item"><i class="fa-solid fa-envelope"></i> Mensagens</a>
+        <a href="javascript:void(0)" class="nav-item"><i class="fa-solid fa-gear"></i> Configurações</a>
+      </nav>
+
+      <div class="bottom-actions" style="margin-top: auto;">
+        <a routerLink="/" class="nav-item text-danger mb-4"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+        
+        <div class="profile-section">
+          <div class="profile-card">
+            <div class="avatar">PF</div>
+            <div class="details">
+              <p class="name">Prof. Fernando</p>
+              <p class="role">Professor</p>
+            </div>
+            <i class="fa-solid fa-chevron-down" style="color: #64748b;"></i>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="content-wrapper">
+        <a routerLink="/dashboard" class="back-link">
+          <i class="fa-solid fa-arrow-left me-2"></i> Voltar ao Dashboard
+        </a>
+
+        <header class="page-header">
+          <h2 class="page-title">Meus Cursos</h2>
+          <p class="page-subtitle">Altere ou apague informações do curso criado</p>
+        </header>
+
+        <div class="course-list">
+          <div class="course-card" *ngFor="let course of courses">
+            <div class="card-header">
+              <h3 class="course-name">{{ course.title }}</h3>
+              <p class="course-subtitle">{{ course.subtitle }}</p>
+            </div>
+
+            <div class="image-upload-area" (click)="!course.imageUrl && fileInput.click()">
+              <input type="file" hidden #fileInput (change)="onFileSelected($event, course, fileInput)" accept="image/*">
+              
+              <ng-container *ngIf="!course.imageUrl">
+                  <i class="fa-regular fa-image fs-1 mb-2"></i>
+                  <p class="upload-text">Imagem do curso</p>
+                  <p class="upload-formats">Formatos: JPG, PNG</p>
+              </ng-container>
+
+              <div *ngIf="course.imageUrl" class="image-preview-container">
+                  <img [src]="course.imageUrl" class="img-preview">
+                  <button class="btn-remove-img" (click)="removeImage(course, $event, fileInput)">
+                      <i class="fa-solid fa-xmark"></i> Apagar Img
+                  </button>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn-delete" (click)="deleteCourse(course)">Apagar Curso</button>
+              <button class="btn-edit" (click)="editCourse(course)">Editar Curso</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

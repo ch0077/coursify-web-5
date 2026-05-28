@@ -1,0 +1,109 @@
+.dashboard-container {
+  height: 100vh;
+  background-color: #0f172a;
+  color: #fff;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 280px;
+  background-color: #1e293b;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo h2 span { color: #3b82f6; }
+
+.nav-link {
+  color: #94a3b8;
+  padding: 12px 15px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+/* 1. O AZUL FIXO: Apenas para a opção que estiver com a classe .active (Criar Curso) */
+.nav-link.active {
+  background-color: #3b82f6 !important;
+  color: #fff !important;
+}
+
+/* 2. O HOVER BRANCO: Para todas as outras opções, mas NÃO para a que já está azul */
+.nav-link:hover:not(.active) {
+  color: #ffffff !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.profile-section {
+  background-color: #334155;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: #6366f1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* FORMULÁRIO */
+.glass-card {
+  background: #1e293b;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.form-control, .form-select, .input-group-text {
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  color: #fff;
+  padding: 12px;
+}
+
+.form-control:focus {
+  background-color: #0f172a;
+  color: #fff;
+  border-color: #3b82f6;
+  box-shadow: none;
+}
+
+.upload-box {
+  border: 2px dashed #334155;
+  border-radius: 15px;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.text-editor-mock {
+  border: 1px solid #334155;
+  border-radius: 10px;
+}
+
+.editor-tools {
+  background: #334155;
+  border-radius: 10px 10px 0 0;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  border: none;
+
+  /* Garante que o label (caixa de upload) aja como um botão */
+label.upload-box {
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+label.upload-box:hover {
+  border-color: #3b82f6; /* Fica azul quando passa o mouse */
+}
+
+/* O segredo para a imagem ficar perfeita, independente do tamanho original */
+.imagem-preview {
+  object-fit: cover; /* Corta o excesso, mas não deforma a imagem */
+  object-position: center; /* Mantém o centro da imagem visível */
+  border-radius: 13px; /* Segue o arredondamento da caixa original (15px - borda) */
+}
+}

@@ -1,0 +1,46 @@
+/* Efeito de vidro para combinar com o login */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo de cada item na lista */
+.cart-item {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateX(5px);
+}
+
+/* Botão de finalizar compra */
+.btn-action {
+  background: #4facfe;
+  background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+  border: none;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+  color: white;
+}
+
+.text-white-50 {
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
+.badge {
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
