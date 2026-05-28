@@ -22,8 +22,8 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // 1. CONEXÃO COM O BANCO DE DADOS
 // ------------------------------------------
 mongoose.connect('mongodb+srv://carloscamisa88_db_user:8bVnIN5nVkSEkURt@coursify.tyjliyj.mongodb.net/usuarios?appName=Coursify')
-  .then(() => console.log('✅ MongoDB conectado no banco Coursify!'))
-  .catch(err => console.log('❌ Erro no Mongo:', err));
+  .then(() => console.log('✅ MongoDB conectado com sucesso!'))
+  .catch(err => console.log('❌ Erro no Mongo:', err.message));
 
 // ------------------------------------------
 // 2. ROTAS DOS USUÁRIOS (LOGIN E CADASTRO)
